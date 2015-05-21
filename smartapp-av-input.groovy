@@ -9,8 +9,8 @@ definition(
 	author: "kristopher@acm.org",
 	description: "Set an AV input based on a mode, motion or a switch",
 	category: "Convenience",
-	iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
-	iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png"
+	iconUrl: "https://s3.amazonaws.com/smartapp-icons/MiscHacking/remote.png",
+	iconX2Url: "https://s3.amazonaws.com/smartapp-icons/MiscHacking/remote@2x.png"
 )
 
 preferences {
@@ -28,7 +28,8 @@ preferences {
 		input "smodes", "mode", title: "Which mode?", multiple:true, required: false
 	}
     section("With this input...") {
-		input(name: "inputChan", type: "text", title: "Which channel?", required: true)
+		input(name: "inputChan", type: "text", title: "Which channel?", required: false)
+        input(name: "level", type: "text", title: "What volume level?", required: false)
 	}
 }
 
@@ -62,5 +63,6 @@ def modeHandler(evt) {
 
 def receiverHandler(evt) {
 	receivers?.inputSelect(inputChan)
+    receivers?.setLevel(level)
     receivers?.refresh()
 }
